@@ -2,7 +2,7 @@ import React from 'react';
 import { useFlickr } from './core/FlickrContext';
 import { Search } from './components/search';
 import styled from 'styled-components';
-
+import { Title } from './components/typography';
 import { FlickrCard } from './containers/FlickrCard';
 
 const Container = styled.div`
@@ -49,6 +49,10 @@ const Grid = styled.div`
 `;
 
 
+const NotFound = styled(Title)`
+  text-align: center;
+`;
+
 
 function App() {
   const data = useFlickr();
@@ -67,6 +71,12 @@ function App() {
           ))}
         </Grid>
       </Container>
+
+      { Boolean(!Array.isArray(data) || data.length === 0) &&
+        <NotFound>
+          No results found
+        </NotFound>
+      }
     </div>
   );
 }
