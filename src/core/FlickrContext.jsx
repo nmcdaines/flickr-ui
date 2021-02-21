@@ -12,7 +12,14 @@ export const FlickrProvider = ({ children }) => {
 
   const setTagsFn = (changedTags = []) => {
     setLoading(true);
-    setTags(changedTags);
+
+    const tagSet = new Set();
+    
+    setTags(changedTags.filter((tag) => {
+      if (tagSet.has(tag)) { return; }
+      tagSet.add(tag);
+      return tag;
+    }));
   }
 
   useEffect(() => {
