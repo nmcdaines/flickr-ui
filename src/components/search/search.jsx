@@ -1,65 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import jsonp from 'jsonp';
 import { useTags, useLoading } from '../../core/FlickrContext';
 import Loader from "react-loader-spinner";
 import { Cover } from '../cover';
+import { SearchBox, Input, TagElement, TagElementButton } from './styles';
 
 const FLICKR_URL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&';
 
-const SearchBox = styled.div`
-  border-radius: 16px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.35);
-  background: #fff;
-  font-size: 22px;
-  padding: 10px 20px;
-  text-align: left;
+const TagsGroup = () => {
+  const [tags, setTags] = useTags();
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  const onDeleteTag = (deleteIndex) => (e) => {
+    e.stopPropagation();
+    const updatedTags = tags.filter((value, index) => deleteIndex !== index);
+    setTags(updatedTags);
+  }
 
-  position: absolute;
-
-  bottom: 30px;
-
-  /* top: 0; */
-  z-index: 100;
-  transform: translateX(0);
-`;
-
-const Input = styled.input`
-  flex-grow: 1;
-  margin-right: 10px;
-  font-size: 22px;
-`;
-
-const TagElement = styled.span`
-  border-radius: 4px;
-  border: 1px solid #2196F3;
-  background-color: rgba(33,150,243,0.15);
-  color: #2196F3;
-
-  font-size: 16px;
-  line-height: 22px;
-
-  margin-right: 10px;
-  padding: 4px 10px;
-`;
-
-const TagElementButton = styled.button`
-  margin-left: 8px;
-  border-radius: 4px;
-  color: #2196F3;
-  /* border: 1px solid #2196F3; */
-  border: none;
-  background: rgba(0,0,0,0.2);
-`;
+  return (
+    <div>
+      { tags && tags.map((tag, index) => (
+        <TagElement>
+          { tag }
+          <TagElementButton
+            onClick={onDeleteTag(index)}
+          >
+            x
+          </TagElementButton>
+        </TagElement>
+      ))}
+    </div>
+  );
+}
 
 export const Search = () => {
   const [searchString, setSearchString] = useState('');
   const [tags, setTags] = useTags();
   const loading = useLoading();
+  const inputEl = useRef();
 
   useEffect(() => {
     jsonp(`${FLICKR_URL}${tags.length > 0 && `tags=${tags.join(',')}`}`);
@@ -78,45 +56,34 @@ export const Search = () => {
     }
   }
 
-  
+  const onInputClick = () => {
+    if (inputEl === null) { return; }
+    inputEl.current.focus();
+  }
 
   return (
     <Cover>
-    <SearchBox>
-      
-      { tags && tags.map((tag, index) => {
-
-        return (
-          <TagElement>
-            { tag }
-            <TagElementButton
-              onClick={
-                () => setTags(
-                  tags.filter((value, tagIndex) => tagIndex !== index)
-                )
-              }
-            >
-              x
-            </TagElementButton>
-          </TagElement>
-        )
-      }) }
-      <Input
-        placeholder="Search Flickr..."
-        onChange={onTextChange}
-        value={searchString}
-      />
-
-      { loading && 
-        <Loader
-          type="TailSpin"
-          color="#00BFFF"
-          height={28}
-          width={28}
-          timeout={3000} //3 secs
+      <SearchBox onClick={onInputClick}>
+        
+        <TagsGroup />
+        <Input
+          placeholder="Search Flickr..."
+          onChange={onTextChange}
+          // onKeyDown={() => }
+          value={searchString}
+          ref={inputEl}
         />
-      }
-    </SearchBox>
+
+        { loading && 
+          <Loader
+            type="TailSpin"
+            color="#00BFFF"
+            height={28}
+            width={28}
+            timeout={3000} //3 secs
+          />
+        }
+      </SearchBox>
     </Cover>
   )
 }

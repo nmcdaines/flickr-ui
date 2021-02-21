@@ -34,6 +34,19 @@ const BackgroundContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const ContentContainer = styled.div`
+  padding: 20px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
 export const Cover = ({ children }) => {
 
   return (
@@ -124,7 +137,9 @@ export const Cover = ({ children }) => {
             src="https://images.unsplash.com/photo-1590808100071-3654286139a4?ixid=MXwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format%2Ccompress&amp;fit=crop&amp;w=1000&amp;h=1000"/>
         </Picture>
       </BackgroundContainer>
-      {children}
+      <ContentContainer>
+        {children}
+      </ContentContainer>
     </Container>
   )
 }
