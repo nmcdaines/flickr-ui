@@ -63,7 +63,10 @@ export const FlickrCard = ({
           <>
             { tagsArray && tagsArray.slice(0,7).map((tag) => {
               return (
-                <Button onClick={() => setTags([...searchTags, tag])}>
+                <Button
+                  key={`button-${link}-tags-${tag}`}
+                  onClick={() => setTags([...searchTags, tag])}
+                >
                   { tag }
                 </Button>
               )
@@ -81,7 +84,10 @@ export const FlickrCard = ({
           <>
             { tagsArray && tagsArray.map((tag) => {
               return (
-                <Button onClick={() => setTags([...searchTags, tag])}>
+                <Button
+                  key={`button-${link}-tags-${tag}`}
+                  onClick={() => setTags([...searchTags, tag])}
+                >
                   { tag }
                 </Button>
               )

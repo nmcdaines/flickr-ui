@@ -24,8 +24,6 @@ export const FlickrProvider = ({ children }) => {
 
   useEffect(() => {
     window.jsonFlickrFeed = (value) => {
-      console.log('here', value);
-
       if (!value) { return; }
       setLoading(false);
       setFlickrData(value?.items);
@@ -36,8 +34,6 @@ export const FlickrProvider = ({ children }) => {
       window.jsonFlickrFeed = undefined;
     }
   }, []);
-
-  console.log(flickrData);
 
   return (
     <>

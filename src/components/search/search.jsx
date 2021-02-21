@@ -22,7 +22,9 @@ const TagsGroup = () => {
   return (
     <div>
       { tags && tags.map((tag, index) => (
-        <TagElement>
+        <TagElement
+          key={`search-tags-${tag}`}
+        >
           { tag }
           <TagElementButton
             onClick={onDeleteTag(index)}
