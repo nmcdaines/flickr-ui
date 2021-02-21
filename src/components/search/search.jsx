@@ -4,7 +4,10 @@ import jsonp from 'jsonp';
 import { useTags, useLoading } from '../../core/FlickrContext';
 import Loader from "react-loader-spinner";
 import { Cover } from '../cover';
-import { SearchBox, Input, TagElement, TagElementButton } from './styles';
+import { SearchBox, SearchBoxInner, Input, TagElement, TagElementButton } from './styles';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const FLICKR_URL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&';
 
@@ -25,7 +28,7 @@ const TagsGroup = () => {
           <TagElementButton
             onClick={onDeleteTag(index)}
           >
-            x
+            <FontAwesomeIcon icon={faTimes} />
           </TagElementButton>
         </TagElement>
       ))}
@@ -61,18 +64,34 @@ export const Search = () => {
     inputEl.current.focus();
   }
 
+  const onSearchEnter = (e) => {
+    let keyPressed = e.keyCode || e.which;
+    if (keyPressed === 13 && e.target.value.length > 0 && e.target.value !== ' ') {
+      e.stopPropagation();
+
+      setTags([...tags, e.target.value]);
+      setSearchString('');
+
+      if (inputEl !== null) {
+        inputEl.current.blur();
+      }
+    }
+  }
+
   return (
     <Cover>
       <SearchBox onClick={onInputClick}>
+        <SearchBoxInner>
+          <Input
+            placeholder="Search image tags"
+            onChange={onTextChange}
+            onKeyDown={onSearchEnter}
+            value={searchString}
+            ref={inputEl}
+          />
+          <TagsGroup />
+        </SearchBoxInner>
         
-        <TagsGroup />
-        <Input
-          placeholder="Search Flickr..."
-          onChange={onTextChange}
-          // onKeyDown={() => }
-          value={searchString}
-          ref={inputEl}
-        />
 
         { loading && 
           <Loader

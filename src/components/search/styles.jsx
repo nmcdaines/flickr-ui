@@ -9,8 +9,8 @@ export const SearchBox = styled.div`
   text-align: left;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  /* align-items: center; */
 
   position: relative;
 
@@ -22,6 +22,9 @@ export const SearchBox = styled.div`
 
   width: 100%;
   overflow: hidden;
+
+  justify-content: center;
+  align-items: center;
 
 
   /* margin: 0px 20px; */
@@ -35,12 +38,25 @@ export const SearchBox = styled.div`
   @media (min-width: 860px) {
     max-width: 820px;
   }
+
+  &:focus-within {
+    box-shadow: inset 0 0 0 3px #2196F3;
+  }
+`;
+
+export const SearchBoxInner = styled.div`
+  flex-grow: 1;
 `;
 
 export const Input = styled.input`
   flex-grow: 1;
   margin-right: 10px;
   font-size: 22px;
+
+  &, &:hover, &:focus, &:active {
+    outline: none;
+    border: none;
+  }
 `;
 
 export const TagElement = styled.span`
@@ -54,13 +70,22 @@ export const TagElement = styled.span`
 
   margin-right: 10px;
   padding: 4px 10px;
+
+  line-height: 34px;
 `;
 
 export const TagElementButton = styled.button`
   margin-left: 8px;
   border-radius: 4px;
   color: #2196F3;
-  /* border: 1px solid #2196F3; */
+  background: none;
+  border: 1px solid #2196F3;
   border: none;
-  background: rgba(0,0,0,0.2);
+  /* background: rgba(0,0,0,0.1); */
+  /* background: #2196F3; */
+
+  &:hover {
+    background: #2196F3;
+    color: #fff;
+  }
 `;
