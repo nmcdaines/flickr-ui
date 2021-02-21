@@ -14,9 +14,9 @@ export const FlickrProvider = ({ children }) => {
     setLoading(true);
 
     const tagSet = new Set();
-    
+
     setTags(changedTags.filter((tag) => {
-      if (tagSet.has(tag)) { return; }
+      if (tagSet.has(tag)) { return undefined; }
       tagSet.add(tag);
       return tag;
     }));

@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-
-import './App.css';
+import React from 'react';
 import { useFlickr } from './core/FlickrContext';
 import { Search } from './components/search';
 import styled from 'styled-components';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Card, CardMedia, CardBody, CardActions } from '../../components/card';
+import { Card, CardMedia, CardActions } from '../../components/card';
 import { Button } from '../../components/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons'
@@ -44,7 +44,11 @@ export const FlickrCard = ({
 
   return (
     <Card>
-      <a href={link} target="_blank">
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+      >
         <CardMedia url={media?.m} >
           <DateTimePill>
             <FontAwesomeIcon icon={faCalendar} />  <span style={{ marginLeft: '4px' }}>{ date.format('MMMM DD, YYYY') }</span>

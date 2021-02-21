@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import jsonp from 'jsonp';
 import { useTags, useLoading } from '../../core/FlickrContext';
 import Loader from "react-loader-spinner";
