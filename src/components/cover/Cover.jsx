@@ -133,7 +133,7 @@ export const Cover = ({ children }) => {
             media="(min-width: 200px)"/>
           <source
             srcset="https://images.unsplash.com/photo-1590808100071-3654286139a4?ixid=MXwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;dpr=1&amp;auto=format%2Ccompress&amp;fit=crop&amp;w=199&amp;h=230 1x, https://images.unsplash.com/photo-1590808100071-3654286139a4?ixid=MXwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;dpr=2&amp;auto=format%2Ccompress&amp;fit=crop&amp;w=199&amp;h=230 2x"/>
-          <img class="_29Gk3" role="presentation"
+          <img class="_29Gk3" alt="" role="presentation"
             src="https://images.unsplash.com/photo-1590808100071-3654286139a4?ixid=MXwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format%2Ccompress&amp;fit=crop&amp;w=1000&amp;h=1000"/>
         </Picture>
       </BackgroundContainer>
